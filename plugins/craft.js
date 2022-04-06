@@ -85,7 +85,7 @@ export function getCraftPreviewTokens() {
 }
 
 // Make a custom erorr object
-class CraftError extends Error {
+export class CraftError extends Error {
 	constructor(errors, payload) {
 
 		// Use the Craft reponse errors as the error message string
