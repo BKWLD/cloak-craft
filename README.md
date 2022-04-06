@@ -5,34 +5,16 @@ Craft CMS API client and static site generation conventions.
 - [View demo](https://cloak-craft.netlify.app)
 - [Edit CodeSandbox](https://githubbox.com/BKWLD/cloak-craft)
 
-## Usage
-
-```vue
-<cloak-craft />
-```
-
 ## Install
 
 1. Install with `yarn add @cloak-app/craft`
 2. Add to `nuxt.config` with `buildModules: ['@cloak-app/craft/nuxt']`
 
-### Project Dependencies
-
-- `.max-w*` styles (included in Cloak via `whitespace.styl`)
-
 ### Module Options
 
 - `cloak.craft:`
-  - `maxWidthClass` - The default max-width class to use for the block.
-
-## Components
-
-### `cloak-craft-block`
-
-Renders a Block to be used within a Tower.
-
-- props:
-  - `maxWidthClass` - A `max-w-*` class to apply to the block
+  - `endpoint` - The Craft CMS API endpoint, for example: https://cms.domain.com/api.  Defaults to `process.env.CMS_ENDPOINT`.
+  - `site` - The Craft CMS Site handle to restrict queries to.  If populated, it gets automatically passed into all GraphQL queries as a variable called `site`.  Defaults to `process.env.CMS_SITE`.
 
 ## Contributing
 

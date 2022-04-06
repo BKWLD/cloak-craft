@@ -11,6 +11,9 @@
 		"start": "nuxt start demo",
 		"generate": "nuxt generate demo --fail-on-error --target=static"
 	},
+	"dependencies": {
+		"@nuxtjs/axios": "^5.0.0"
+	},
 	"devDependencies": {
 		"@cloak-app/boilerplate": "^1.0.0",
 		"@cloak-app/demo-theme": "^1.0.1",

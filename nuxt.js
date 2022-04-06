@@ -4,30 +4,31 @@ export default function() {
 	// Have Nuxt transpile resources
 	this.options.build.transpile.push('@cloak-app/craft')
 
-	// Allow components to be auto-imported by Nuxt
-	this.nuxt.hook('components:dirs', dirs => {
-		dirs.push({
-			path: join(__dirname, './adapters'),
-			extensions: ['js', 'coffee'],
-			prefix: 'cloak-craft',
-			level: 2,
-		})
-		dirs.push({
-			path: join(__dirname, './components'),
-			extensions: ['vue', 'js', 'coffee'],
-			prefix: 'cloak-craft',
-			level: 2,
-		})
-	})
+	// Set default options
+	this.options.cloak = {
+		...this.options.cloak,
+		craft: {
+			endpoint: process.env.CMS_ENDPOINT,
+			site: process.env.CMS_SITE,
+			...this.options.cloak?.craft,
+		}
+	}
 
 	// Relay package options to runtime config
 	this.options.publicRuntimeConfig.cloak = {
 		...this.options.publicRuntimeConfig.cloak,
-		craft: {
-			blockMaxWidthClass: 'max-w',
-			...this.options.cloak?.craft,
-		}
+		craft: this.options.cloak.craft,
 	}
+
+	// Add Axios module at the end so it can be used in the plugin
+	this.nuxt.hook('modules:done', moduleContainer => {
+		moduleContainer.requireModule('@nuxtjs/axios')
+	})
+
+	// Add the Craft plugin which creates the Craft instance of Axios
+	this.addPlugin({
+		src: join(__dirname, 'plugins/craft.js')
+	})
 }
 
 // Required for published modules
