@@ -1,0 +1,20 @@
+{
+	"name": "@cloak-app/craft",
+	"version": "0.0.1",
+	"description": "Craft CMS API client and static site generation conventions.",
+	"repository": "git@github.com:BKWLD/cloak-craft.git",
+	"author": "Bukwild <info@bukwild.com>",
+	"license": "MIT",
+	"scripts": {
+		"dev": "nuxt dev demo",
+		"build": "nuxt build demo",
+		"start": "nuxt start demo",
+		"generate": "nuxt generate demo --fail-on-error --target=static"
+	},
+	"devDependencies": {
+		"@cloak-app/boilerplate": "^1.0.0",
+		"@cloak-app/demo-theme": "^1.0.1",
+		"@nuxt/content": "^1.14.0",
+		"nuxt": "^2.15.7"
+	}
+}

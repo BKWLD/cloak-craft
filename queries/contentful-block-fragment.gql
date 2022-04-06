@@ -1,0 +1,4 @@
+# Fetch a craft block
+fragment craftBlock on BlockCraft {
+	# Fields go here
+}
