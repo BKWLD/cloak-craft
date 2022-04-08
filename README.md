@@ -8,7 +8,7 @@ Craft CMS API client and static site generation conventions.
 ## Install
 
 1. Install with `yarn add @cloak-app/craft`
-2. Add to `nuxt.config` with `buildModules: ['@cloak-app/craft/nuxt']`
+2. Add to `nuxt.config` with `buildModules: ['@cloak-app/craft']`
 
 ### Module Options
 
