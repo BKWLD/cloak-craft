@@ -48,6 +48,9 @@ export function makeCraftClient(axios, { endpoint, site } = {}) {
 		return (await craft.execute(payload)).entry
 	}
 
+	// Update the site variable
+	craft.setSite = (newSite) => site = newSite
+
 	// Return the client
 	return craft
 }
