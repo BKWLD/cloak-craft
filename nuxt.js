@@ -1,4 +1,5 @@
 import { join } from 'path'
+import { requireOnce } from '@cloak-app/utils'
 export default function() {
 
 	// Have Nuxt transpile resources
@@ -22,7 +23,7 @@ export default function() {
 
 	// Add Axios module at the end so it can be used in the plugin
 	this.nuxt.hook('modules:done', moduleContainer => {
-		moduleContainer.requireModule('@nuxtjs/axios')
+		requireOnce(moduleContainer, '@nuxtjs/axios')
 	})
 
 	// Add the Craft plugin which creates the Craft instance of Axios
