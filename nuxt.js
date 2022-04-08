@@ -6,7 +6,7 @@ export default function() {
 	this.options.build.transpile.push('@cloak-app/craft')
 
 	// Set default options
-	setPublicDefaultOptions(this.options, 'craft', {
+	setPublicDefaultOptions(this, 'craft', {
 		endpoint: process.env.CMS_ENDPOINT,
 		site: process.env.CMS_SITE,
 	})
