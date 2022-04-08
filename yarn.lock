@@ -983,6 +983,11 @@
   resolved "https://registry.yarnpkg.com/@cloak-app/utils/-/utils-1.0.1.tgz#e6cbb84504b0bac15a36da5c63cd76ce4dbb8821"
   integrity sha512-ndOycoeM3GXmFgyCBKrvWXaagAtl/y70a+rC0MT8Pp6VRXGbglu69qqUEg0yBjZt/bTwBYEe3hNqw5wgrH7B2w==
 
+"@cloak-app/utils@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@cloak-app/utils/-/utils-1.1.0.tgz#9963c48f8a0a50e16c95350cb8bfc8272047f413"
+  integrity sha512-N/qgY0da4PuBH3AJcuOFCGOAmR4J4ncQVJzJAu5vkXRAx6zV4jM/6qDwHC/wan+2MMdQa4EqRsIRUu3K58FReA==
+
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"

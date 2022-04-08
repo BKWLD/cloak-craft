@@ -1,25 +1,15 @@
 import { join } from 'path'
-import { requireOnce } from '@cloak-app/utils'
+import { requireOnce, setPublicDefaultOptions } from '@cloak-app/utils'
 export default function() {
 
 	// Have Nuxt transpile resources
 	this.options.build.transpile.push('@cloak-app/craft')
 
 	// Set default options
-	this.options.cloak = {
-		...this.options.cloak,
-		craft: {
-			endpoint: process.env.CMS_ENDPOINT,
-			site: process.env.CMS_SITE,
-			...this.options.cloak?.craft,
-		}
-	}
-
-	// Relay package options to runtime config
-	this.options.publicRuntimeConfig.cloak = {
-		...this.options.publicRuntimeConfig.cloak,
-		craft: this.options.cloak.craft,
-	}
+	setPublicDefaultOptions(this.options, 'craft', {
+		endpoint: process.env.CMS_ENDPOINT,
+		site: process.env.CMS_SITE,
+	})
 
 	// Add Axios module at the end so it can be used in the plugin
 	this.nuxt.hook('modules:done', moduleContainer => {
