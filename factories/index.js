@@ -1,1 +1,1 @@
-export * from './craft-client'
+export * from './craft-client-factory'
