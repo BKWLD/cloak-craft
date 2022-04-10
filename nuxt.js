@@ -16,10 +16,10 @@ export default function() {
 		requireOnce(moduleContainer, '@nuxtjs/axios')
 	})
 
-	// Add the Craft plugin which creates the Craft instance of Axios
-	this.addPlugin({
-		src: join(__dirname, 'plugins/craft.js')
-	})
+	// Add the Craft plugin which creates the Craft instance of Axios. Not using
+	// this.addPlugin so I don't have to deal with adding sub-imports via
+	// addTemplate.
+	this.options.plugins.unshift(join(__dirname, 'plugins/craft.js'))
 }
 
 // Required for published modules
