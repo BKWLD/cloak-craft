@@ -32,7 +32,7 @@ The [`craft` Nuxt plugin](./plugins/craft.js) injects `$craft` globally.  This i
 You can make an instance of the Craft Axios client when outside of Nuxt (like in a Netlify function) as follows:
 
 ```js
-import { makeCraftClient } from '@cloak-app/craft/plugins/craft'
+import { makeCraftClient } from '@cloak-app/craft/factories'
 import axios from 'axios'
 const craft = makeCraftClient(axios, {
   endpoint: process.env.CMS_ENDPOINT,
