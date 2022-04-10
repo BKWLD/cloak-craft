@@ -22,7 +22,7 @@ Craft CMS API client and static site generation conventions.
 
 The [`craft` Nuxt plugin](./plugins/craft.js) injects `$craft` globally.  This is an Axios instance with it's `baseUrl` set to `cloak.craft.endpoint`.  In addition, you can call:
 
-- `$craft.execute({ query, variables })` - Expects a GraphQL request that automatically adds a `site` GraphQL variable with the value from the `cloak.craft.site` value.
+- `$craft.execute({ query, variables })` - Executes a GraphQL request that automatically adds a `site` GraphQL variable with the value from the `cloak.craft.site` value.
 - `$craft.getEntries({ query, variables })` - Sugar for `$craft.execute()` that returns the `entries` property of the GraphQL response.
 - `$craft.getEntry({ query, variables })` - Sugar for `$craft.execute()` that returns the `entry` property of the GraphQL response.
 - `$craft.setSite(site)` - Updates the `site` variable for all future requests at runtime.
