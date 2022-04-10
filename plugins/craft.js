@@ -11,9 +11,12 @@ export default function({ $axios, $config }, inject) {
 export function makeCraftClient(axios, { endpoint, site } = {}) {
 
 	// Make Craft instance
-	const craft = axios.create()
-	craft.setBaseURL(endpoint)
-	craft.setHeader('Content-Type', 'application/json')
+	const craft = axios.create({
+		baseURL: endpoint,
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	})
 
 	// Add execute helper for running gql queries
 	craft.execute = async payload => {
