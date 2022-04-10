@@ -18,10 +18,6 @@ export default {
 			siteName: '@cloak-app/craft demo',
 		},
 
-		// Example settings for this package
-		craft: {
-			blockMaxWidthClass: 'max-w',
-		}
 	},
 
 	// @nuxt/content can't be loaded from module
