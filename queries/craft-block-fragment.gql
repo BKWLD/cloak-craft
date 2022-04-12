@@ -1,4 +1,0 @@
-# Fetch a craft block
-fragment craftBlock on blocks_craft_BlockType {
-	# Fields go here
-}

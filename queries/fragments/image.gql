@@ -1,0 +1,12 @@
+# A standard image asset fragment, expecting to use a image resizing library
+# like imgix to produce crops
+fragment image on AssetInterface {
+	id
+	width
+	height
+	title
+	mimeType
+	focalPoint
+	path
+}
+
