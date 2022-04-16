@@ -3,5 +3,8 @@
  */
 import { makeCraftClient } from '../factories'
 export default function({ $axios, $config }, inject) {
-	inject('craft', makeCraftClient($axios, $config.cloak.craft))
+	inject('craft', makeCraftClient({
+		...$config.cloak.craft,
+		axios: $axios,
+	}))
 }

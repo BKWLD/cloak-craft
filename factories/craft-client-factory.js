@@ -1,7 +1,7 @@
 import pickBy from 'lodash/pickBy'
 
 // Factory method for making Craft Axios clients
-export function makeCraftClient(axios, { endpoint, site } = {}) {
+export default function (axios, { endpoint, site } = {}) {
 
 	// Make Craft instance
 	const craft = axios.create({
