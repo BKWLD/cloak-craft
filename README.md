@@ -35,8 +35,7 @@ You can make an instance of the Craft Axios client when outside of Nuxt (like in
 
 ```js
 import { makeCraftClient } from '@cloak-app/craft/factories'
-import axios from 'axios'
-const craft = makeCraftClient(axios, {
+const craft = makeCraftClient({
   endpoint: process.env.CMS_ENDPOINT,
   site: process.env.CMS_SITE,
 })
