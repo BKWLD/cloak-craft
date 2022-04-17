@@ -10,11 +10,12 @@ Craft CMS API client and static site generation conventions.
 1. Install with `yarn add @cloak-app/craft`
 2. Add to `nuxt.config` with `modules: ['@cloak-app/craft']`
 
-### Options
+### Module Options
 
-- `cloak.craft:`
-  - `endpoint` - The Craft CMS API endpoint, for example: https://cms.domain.com/api.  Defaults to `process.env.CMS_ENDPOINT`.
-  - `site` - The Craft CMS Site handle to restrict queries to.  If populated, it gets automatically passed into all GraphQL queries as a variable called `site`.  Defaults to `process.env.CMS_SITE`.
+Set these properties within `cloak: { craft: { ... } }` in the nuxt.config.js:
+
+- `endpoint` - The Craft CMS API endpoint, for example: https://cms.domain.com/api.  Defaults to `process.env.CMS_ENDPOINT`.
+- `site` - The Craft CMS Site handle to restrict queries to.  If populated, it gets automatically passed into all GraphQL queries as a variable called `site`.  Defaults to `process.env.CMS_SITE`.
 
 ## Usage
 
