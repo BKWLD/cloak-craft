@@ -1,5 +1,6 @@
 import consola from 'consola'
 import { makeCraftClient } from '../factories'
+import defaultsDeep from 'lodash/defaultsDeep'
 
 /**
  * Module that added dynamic pages (like towers) to the generated routes
@@ -8,6 +9,9 @@ export default function() {
 
 	// Make a consola scope
 	const log = consola.withTag('@cloak-app/craft')
+
+	// Create noindex property in sitemap options in case this loads first
+	defaultsDeep(this.options, { sitemap: { routes: [] }})
 
 	// Adding routes
 	this.nuxt.hook('generate:extendRoutes', async routes => {
@@ -26,13 +30,17 @@ export default function() {
 			return getEntriesForType($craft, typename)
 		}))).flat()
 
-		// Add routes to the list that should be generated
+		// Loop through the entries
 		entries.forEach(entry => {
+
+			// Add routes to the list that should be generated
 			const route = entry.uri == '__home__' ? '/' : `/${entry.uri}`
 			routes.push({ route })
-		})
 
-		// Add noindex routes to @nuxtjs/sitemap's exclusion list
+			// Add routes without noindex to @nuxtjs/sitemap
+			const robots = entry.seo?.[0]?.robots || entry.robots || []
+			if (!robots.includes('noindex')) this.options.sitemap.routes.push(route)
+		})
 
 		// All done
 		log.info(`Added SSG routes`)
