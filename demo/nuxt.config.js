@@ -1,4 +1,5 @@
 import { addPluginAfter } from '@cloak-app/utils'
+import { makeCraftMock } from './plugins/mock-craft'
 
 // Nuxt config
 export default {
@@ -21,9 +22,16 @@ export default {
 			siteName: '@cloak-app/craft demo',
 		},
 
+		// Generate test pages
+		craft: {
+			pageTypenames: [ 'towers_tower_Entry' ],
+		},
 	},
 
-	// Load plugin that mocks Craft data
+	// Make a mock that is used in nuxt hooks of this module
+	craftMock: makeCraftMock(),
+
+	// Load plugin that mocks runtime crat data data
 	extendPlugins(plugins) {
 		return addPluginAfter(plugins, 'craft-client', '~/plugins/mock-craft')
 	}

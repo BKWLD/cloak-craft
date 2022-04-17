@@ -1,5 +1,9 @@
 import { join } from 'path'
-import { requireOnce, setPublicDefaultOptions } from '@cloak-app/utils'
+import {
+	requireLate,
+	requireOnce,
+	setPublicDefaultOptions
+} from '@cloak-app/utils'
 export default function() {
 
 	// Have Nuxt transpile resources
@@ -9,17 +13,19 @@ export default function() {
 	setPublicDefaultOptions(this, 'craft', {
 		endpoint: process.env.CMS_ENDPOINT,
 		site: process.env.CMS_SITE,
+		pageTypenames: [],
 	})
 
 	// Add Axios module at the end so it can be used in the plugin
-	this.nuxt.hook('modules:done', moduleContainer => {
-		requireOnce(moduleContainer, '@nuxtjs/axios')
-	})
+	requireLate(this, '@nuxtjs/axios')
 
 	// Add the Craft plugin which creates the Craft instance of Axios. Not using
 	// this.addPlugin so I don't have to deal with adding sub-imports via
 	// addTemplate.
 	this.options.plugins.unshift(join(__dirname, 'plugins/craft-client.js'))
+
+	// Statically generate dynamic pages
+	requireOnce(this, join(__dirname, './modules/generate-pages.js'))
 }
 
 // Required for published modules
