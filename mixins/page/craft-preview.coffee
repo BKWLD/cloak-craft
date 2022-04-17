@@ -27,7 +27,8 @@ export default
 
 		# Handle postMessages, looking for preview content updates
 		onPostMessage: ({ origin, data }) ->
-			return unless origin == (new URL process.env.CMS_ENDPOINT).origin
+			return unless endpoint = @$config.cloak.craft.endpoint
+			return unless origin == (new URL endpoint).origin
 			@refreshData() if data == 'preview:change'
 
 		# Refetch the page content then replace the page data.

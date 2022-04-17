@@ -1,29 +1,33 @@
-<!-- List all of the towers given the CMS endpoint -->
+<!-- Example for use with static generation demo -->
 
 <template lang='pug'>
 
-ul.tower-list
-	li(v-for='tower in towers' :key='tower.id')
-		| {{ tower.title }} ({{ tower.id }})
+.tower
+	h1 {{ page.title }}
+	p This page was created with mocked Craft data.
 
 </template>
 
 <!-- ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
 <script lang='coffee'>
+import pageMixin from '../../mixins/page'
 export default
 
-	data: -> towers: []
+	mixins: [ pageMixin ]
 
-	fetch: ->
-		@towers = await @$craft.getEntries query: """
-			query {
-				entries(section: "towers") {
-					id
-					title
+	# Page page data
+	asyncData: ({ $craft, params }) ->
+		page = await $craft.getEntry
+			variables: uri: params.tower
+			query: '''
+				query getTower($uri:[String], $site:[String]) {
+					entry(uri:$uri, site:$site) {
+						title
+					}
 				}
-			}
-			"""
+			'''
+		return { page }
 
 </script>
 
@@ -31,8 +35,6 @@ export default
 
 <style lang='stylus' scoped>
 
-.tower-list
-	border 1px dashed currentColor
-	padding 1em
+
 
 </style>

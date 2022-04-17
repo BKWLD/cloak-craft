@@ -1,0 +1,24 @@
+{
+	"data": {
+		"entries": [
+			{
+				"uri": "example-1",
+				"seo": [
+					{
+						"robots": [
+							"noindex"
+						]
+					}
+				]
+			},
+			{
+				"uri": "example-2",
+				"seo": [
+					{
+						"robots": []
+					}
+				]
+			}
+		]
+	}
+}

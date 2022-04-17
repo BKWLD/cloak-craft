@@ -1,43 +1,10 @@
 # [@cloak-app/craft](https://github.com/BKWLD/cloak-craft)
 
-## List Towers of a site
+## View example towers
 
-This is quick demo for testing regressions that lists the towers of a site
+The demo site generates a couple example towers.  You can view them here:
 
-<tower-list></tower-list>
+- [Example 1](/example-1)
+- [Example 2](/example-2)
 
-```vue
-<template lang='pug'>
-
-ul.tower-list
-  li(v-for='tower in towers' :key='tower.id')
-    | {{ tower.title }} ({{ tower.id }})
-
-</template>
-
-<script lang='coffee'>
-export default
-
-  data: -> towers: []
-
-  fetch: ->
-    @towers = await @$craft.getEntries query: """
-      query {
-        entries(section: "towers") {
-          id
-          title
-        }
-      }
-      """
-
-</script>
-
-<style lang='stylus' scoped>
-
-.tower-list
-  border 1px dashed currentColor
-  padding 1em
-
-</style>
-```
 
