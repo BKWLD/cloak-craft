@@ -11,7 +11,10 @@
 <!-- ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
 <script lang='coffee'>
+import pageMixin from '../../mixins/page'
 export default
+
+	mixins: [ pageMixin ]
 
 	# Page page data
 	asyncData: ({ $craft, params }) ->
