@@ -1,5 +1,5 @@
 import consola from 'consola'
-import { makeCraftClient } from '../factories'
+import { makeModuleCraftClient } from '../factories'
 import defaultsDeep from 'lodash/defaultsDeep'
 
 /**
@@ -17,15 +17,14 @@ export default function() {
 	this.nuxt.hook('generate:extendRoutes', async routes => {
 
 		// Log starting
-		const craftOptions = this.options.cloak.craft,
-			pageTypenames = craftOptions.pageTypenames
+		const pageTypenames = this.options.cloak.craft.pageTypenames
 		if (!pageTypenames.length) return
 		log.info(`Adding SSG routes for ${pageTypenames.length} pageTypenames`)
 
-		// Make Craft client (we don't have access to the plugin created one)
-		const $craft = this.options.craftMock || makeCraftClient(craftOptions)
+		// Make Craft client
+		const $craft = makeModuleCraftClient(this)
 
-		// Make an array of the URIs and robots rules of all pages to be generated
+		// Get an array of URIs and robots rules of all pages to be generated
 		const entries = (await Promise.all(pageTypenames.map(typename => {
 			return getEntriesForType($craft, typename)
 		}))).flat()

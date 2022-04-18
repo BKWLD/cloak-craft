@@ -8,6 +8,7 @@ import { makeCraftClient } from '../../factories'
 import pageEntriesToGenerate from '../stubs/page-entries-to-generate.json'
 import towerExample1 from '../stubs/towers/example-1.json'
 import towerExample2 from '../stubs/towers/example-2.json'
+import redirects from '../stubs/redirects.json'
 
 // Nuxt plugin
 export default function ({ $craft }) {
@@ -40,6 +41,8 @@ export function addMocks(client) {
 			} else if (payload.variables.uri == 'example-2') {
 				return [200, towerExample2]
 			}
+		} else if (payload.query.includes('getRedirects')) {
+			return [200, redirects]
 		}
 
 		// A request didn't match expectations
