@@ -39,7 +39,7 @@ function getRedirects($craft) {
 	return $craft.getEntries({
 		query: `
 			query getRedirects($site:[String]) {
-				entries(type:'redirects', site:$site) {
+				entries(section:"redirects", site:$site) {
 					... on redirects_redirects_Entry {
 						from: redirectFrom
 						to: redirectTo
