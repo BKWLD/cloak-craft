@@ -17,8 +17,8 @@ export default
 	mixins: [ pageMixin ]
 
 	# Page page data
-	asyncData: ({ $craft, params }) ->
-		page = await $craft.getEntry
+	asyncData: ({ $craft, $notFound, params }) ->
+		try page = await $craft.getEntry
 			variables: uri: params.tower
 			query: '''
 				query getTower($uri:[String], $site:[String]) {
@@ -27,6 +27,7 @@ export default
 					}
 				}
 			'''
+		catch e then $notFound()
 		return { page }
 
 </script>
