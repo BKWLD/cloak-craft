@@ -5,6 +5,13 @@ Craft CMS API client and static site generation conventions.
 - [View demo](https://cloak-craft.netlify.app)
 - [Edit CodeSandbox](https://githubbox.com/BKWLD/cloak-craft)
 
+### Features
+
+- Globally injected `$craft` helper object for executing queries that are scoped to a Craft site.
+- Helper factory methods for constructing `$craft` outside of Nuxt runtime code.
+- Automatic static generate of dynamic routes using `pageTypenames`.
+- Automatic creation of Netlify `_redirects` file from Craft "Redirects" section.
+
 ## Install
 
 1. Install with `yarn add @cloak-app/craft`
