@@ -25,6 +25,23 @@ Set these properties within `cloak: { craft: { ... } }` in the nuxt.config.js:
 - `site` - The Craft CMS Site handle to restrict queries to.  If populated, it gets automatically passed into all GraphQL queries as a variable called `site`.  Defaults to `process.env.CMS_SITE`.
 - `pageTypenames` - An array of GraphQL typenames of Craft entry types whose URIs should be generated as pages.  For example: `['towers_tower_Entry']`.  Defaults to `[]`.
 
+Example, from a page component:
+
+```coffee
+export default
+  asyncData: ({ $craft, params }) ->
+    page = await $craft.getEntry
+      variables: uri: params.tower
+      query: '''
+        query getTower($uri:[String], $site:[String]) {
+          entry(uri:$uri, site:$site) {
+            title
+          }
+        }
+      '''
+    return { page }
+```
+
 ## Usage
 
 ### Inside of Nuxt
