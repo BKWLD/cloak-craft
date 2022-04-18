@@ -1,7 +1,7 @@
 import consola from 'consola'
 import { join } from 'path'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
-import { makeModuleCraftClient } from '../factories'
+import { makeCraftClientForModule } from '../factories'
 
 /*
  * A Nuxt module that appends redirects that don't end in an anchor to the
@@ -16,11 +16,9 @@ export default function() {
 	this.nuxt.hook('generate:distCopied', async ({ options }) => {
 		log.info('Adding server side redirects')
 
-		// Make Craft client
-		const $craft = makeModuleCraftClient(this)
-
 		// Fetch the server side redirects
-		const rules = await getRedirects($craft);
+		const $craft = makeCraftClientForModule(this),
+			rules = await getRedirects($craft);
 
 		// Open up _redirects
 		const file = join(options.srcDir, 'dist/_redirects')
