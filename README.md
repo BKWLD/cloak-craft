@@ -44,6 +44,10 @@ const articles = await craft.getEntries({
 })
 ```
 
+### Regarding fallback
+
+This package enables the [`generate.fallback` option.](https://nuxtjs.org/docs/configuration-glossary/configuration-generate#fallback).  This is done so that admins can use Craft previews on new pages that haven't been statically generated yet.  When the fallback is rendered, data that would normally be pre-fetched into Vuex via [`nuxtServerInit`](https://nuxtjs.org/docs/directory-structure/store#the-nuxtserverinit-action) _won't_ exist before the page is mounted.  Thus, you need to be careful to add `v-if` test conditions for dependent Vuex data, like the header and footer.
+
 ## Contributing
 
 Run `yarn dev` to open a Nuxt dev build of [the demo directory](./demo).
