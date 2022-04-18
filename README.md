@@ -29,7 +29,7 @@ Set these properties within `cloak: { craft: { ... } }` in the nuxt.config.js:
 
 ### Inside of Nuxt
 
-The [`craft` Nuxt plugin](./plugins/craft.js) injects `$craft` globally.  This is an Axios instance with it's `baseUrl` set to `cloak.craft.endpoint`.  In addition, you can call:
+The [`craft-client` Nuxt plugin](./plugins/craft-client.js) injects `$craft` globally.  This is an Axios instance with it's `baseUrl` set to `cloak.craft.endpoint`.  In addition, you can call:
 
 - `$craft.execute({ query, variables })` - Executes a GraphQL request that automatically adds a `site` GraphQL variable with the value from the `cloak.craft.site` value.
 - `$craft.getEntries({ query, variables })` - Sugar for `$craft.execute()` that returns the `entries` property of the GraphQL response.
