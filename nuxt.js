@@ -16,6 +16,11 @@ export default function() {
 		pageTypenames: [],
 	})
 
+	// Enable the generate fallback. This is done so that Craft's preview system
+	// will work on pages that haven't been statically generate yet, aka new
+	// pages.
+	this.options.generate.fallback = true
+
 	// Add Axios module at the end so it can be used in the plugin
 	requireLate(this, '@nuxtjs/axios')
 
