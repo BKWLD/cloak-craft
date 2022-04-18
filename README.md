@@ -58,7 +58,7 @@ You can use the `makeModuleCraftClient()` factory method within a Nuxt module to
 
 ```js
 // A Nuxt module
-import makeModuleCraftClient from '@cloak-app/craft/factories'
+import { makeModuleCraftClient } from '@cloak-app/craft/factories'
 export default function() {
   const $craft = makeModuleCraftClient(this)
 }
