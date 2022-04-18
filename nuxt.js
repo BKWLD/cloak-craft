@@ -26,6 +26,11 @@ export default function() {
 
 	// Statically generate dynamic pages
 	requireOnce(this, join(__dirname, './modules/generate-pages.js'))
+
+	// Generate Netlify redirects
+	if (process.env.NETLIFY) {
+		requireOnce(this, join(__dirname, './modules/create-netlify-redirects.js'))
+	}
 }
 
 // Required for published modules
