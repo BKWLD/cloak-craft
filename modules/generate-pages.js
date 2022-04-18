@@ -1,5 +1,5 @@
 import consola from 'consola'
-import { makeCraftClientForModule } from '../factories'
+import { makeModuleCraftClient } from '../factories'
 import defaultsDeep from 'lodash/defaultsDeep'
 
 /**
@@ -22,7 +22,7 @@ export default function() {
 		log.info(`Adding SSG routes for ${pageTypenames.length} pageTypenames`)
 
 		// Get an array of URIs and robots rules of all pages to be generated
-		const $craft = makeCraftClientForModule(this),
+		const $craft = makeModuleCraftClient(this),
 			entries = (await Promise.all(
 				pageTypenames.map(typename => {
 					return getEntriesForType($craft, typename)

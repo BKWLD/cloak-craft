@@ -27,7 +27,7 @@ Set these properties within `cloak: { craft: { ... } }` in the nuxt.config.js:
 
 ## Usage
 
-### Inside of Nuxt
+### Inside of Nuxt app
 
 The [`craft-client` Nuxt plugin](./plugins/craft-client.js) injects `$craft` globally.  This is an Axios instance with it's `baseUrl` set to `cloak.craft.endpoint`.  In addition, you can call:
 
@@ -36,9 +36,8 @@ The [`craft-client` Nuxt plugin](./plugins/craft-client.js) injects `$craft` glo
 - `$craft.getEntry({ query, variables })` - Sugar for `$craft.execute()` that returns the `entry` property of the GraphQL response.
 - `$craft.setSite(site)` - Updates the `site` variable for all future requests at runtime.
 
-Example, from a page component:
-
 ```coffee
+# A page component
 export default
   asyncData: ({ $craft, params }) ->
     page = await $craft.getEntry
@@ -53,18 +52,29 @@ export default
     return { page }
 ```
 
+### Inside of Nuxt module
+
+You can use the `makeModuleCraftClient()` factory method within a Nuxt module to build a `$craft` instance.  In a module, we can't use the instance that is injected by the `craft-client` because that is constructed later in the lifecycle
+
+```js
+// A Nuxt module
+import makeModuleCraftClient from '@cloak-app/craft/factories'
+export default function() {
+  const $craft = makeModuleCraftClient(this)
+}
+```
+
 ### Outside of Nuxt
 
 You can make an instance of the Craft Axios client when outside of Nuxt (like in a Netlify function) as follows:
 
 ```js
+// The entry point of a non-Nuxt app
+import Vue from 'vue'
 import { makeCraftClient } from '@cloak-app/craft/factories'
-const craft = makeCraftClient({
+Vue.prototype.$craft = makeCraftClient({
   endpoint: process.env.CMS_ENDPOINT,
   site: process.env.CMS_SITE,
-})
-const articles = await craft.getEntries({
-  query: '{ entries(section:"articles") { id, title } }'
 })
 ```
 
