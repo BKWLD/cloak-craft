@@ -25,6 +25,17 @@ Set these properties within `cloak: { craft: { ... } }` in the nuxt.config.js:
 - `site` - The Craft CMS Site handle to restrict queries to.  If populated, it gets automatically passed into all GraphQL queries as a variable called `site`.  Defaults to `process.env.CMS_SITE`.
 - `pageTypenames` - An array of GraphQL typenames of Craft entry types whose URIs should be generated as pages.  For example: `['towers_tower_Entry']`.  Defaults to `[]`.
 
+## Usage
+
+### Inside of Nuxt
+
+The [`craft` Nuxt plugin](./plugins/craft.js) injects `$craft` globally.  This is an Axios instance with it's `baseUrl` set to `cloak.craft.endpoint`.  In addition, you can call:
+
+- `$craft.execute({ query, variables })` - Executes a GraphQL request that automatically adds a `site` GraphQL variable with the value from the `cloak.craft.site` value.
+- `$craft.getEntries({ query, variables })` - Sugar for `$craft.execute()` that returns the `entries` property of the GraphQL response.
+- `$craft.getEntry({ query, variables })` - Sugar for `$craft.execute()` that returns the `entry` property of the GraphQL response.
+- `$craft.setSite(site)` - Updates the `site` variable for all future requests at runtime.
+
 Example, from a page component:
 
 ```coffee
@@ -41,17 +52,6 @@ export default
       '''
     return { page }
 ```
-
-## Usage
-
-### Inside of Nuxt
-
-The [`craft` Nuxt plugin](./plugins/craft.js) injects `$craft` globally.  This is an Axios instance with it's `baseUrl` set to `cloak.craft.endpoint`.  In addition, you can call:
-
-- `$craft.execute({ query, variables })` - Executes a GraphQL request that automatically adds a `site` GraphQL variable with the value from the `cloak.craft.site` value.
-- `$craft.getEntries({ query, variables })` - Sugar for `$craft.execute()` that returns the `entries` property of the GraphQL response.
-- `$craft.getEntry({ query, variables })` - Sugar for `$craft.execute()` that returns the `entry` property of the GraphQL response.
-- `$craft.setSite(site)` - Updates the `site` variable for all future requests at runtime.
 
 ### Outside of Nuxt
 
