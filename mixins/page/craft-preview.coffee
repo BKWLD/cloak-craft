@@ -7,7 +7,8 @@ export default
 	mounted: ->
 
 		# Listen for content changes from Craft's preview mode
-		window.addEventListener 'message', @onPostMessage
+		if @isCraftPreviewRequest
+		then window.addEventListener 'message', @onPostMessage
 
 		# Immediately refresh if mounting into a preview request on SSG.
 		if process.static && @isCraftPreviewRequest then @refreshData()
@@ -31,12 +32,7 @@ export default
 			return unless origin == (new URL endpoint).origin
 			@refreshData() if data == 'preview:change'
 
-		# Refetch the page content then replace the page data.
+		# Refetch the page content
 		refreshData: debounce ->
-			asyncData = @$route.matched?[0]?.components.default.options.asyncData
-			return unless asyncData
-			@$nuxt.$loading.start()
-			data = await asyncData @$nuxt.context
-			@[key] = val for key, val of data
-			@$nuxt.$loading.finish()
+			@$nuxt.refresh()
 		, 50
