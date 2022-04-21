@@ -1,7 +1,7 @@
 import pickBy from 'lodash/pickBy'
 
 // Factory method for making Craft Axios clients
-export default function (axios, { endpoint, site } = {}) {
+export default function (axios, { endpoint, site, query } = {}) {
 
 	// Make Craft instance
 	const craft = axios.create({
@@ -22,7 +22,7 @@ export default function (axios, { endpoint, site } = {}) {
 		const response = await craft({
 			method: 'POST',
 			data: payload,
-			params: getCraftPreviewTokens(),
+			params: getCraftPreviewTokens(query),
 		})
 
 		// Handle errors in response
@@ -76,11 +76,16 @@ export function restrictToSite(payload, site) {
 }
 
 // Get Craft preview tokens from the location
-export function getCraftPreviewTokens() {
+export function getCraftPreviewTokens(nuxtQuery) {
+
+	// Use query object as source if provided.
+	if (nuxtQuery?.token) return { token: nuxtQuery.token }
+
+	// Else, use the window
 	if (typeof window === 'undefined') return
-	const query = (new URL(window.location.href)).searchParams
-	if (!query) return
-	return { token: query.get('token') }
+	const searchParams = (new URL(window.location.href)).searchParams
+	if (!searchParams) return
+	return { token: searchParams.get('token') }
 }
 
 // Make a custom erorr object
