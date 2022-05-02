@@ -79,7 +79,7 @@ export function restrictToSite(payload, site) {
 export function getCraftPreviewTokens(nuxtQuery) {
 
 	// Use query object as source if provided.
-	if (nuxtQuery?.token) return { token: nuxtQuery.token }
+	if (nuxtQuery && nuxtQuery.token) return { token: nuxtQuery.token }
 
 	// Else, use the window
 	if (typeof window === 'undefined') return
