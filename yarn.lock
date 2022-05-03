@@ -983,10 +983,10 @@
   resolved "https://registry.yarnpkg.com/@cloak-app/utils/-/utils-1.5.0.tgz#7856e26397a1f93e782304d6c69db5b752c711fd"
   integrity sha512-RRLTey0a6fMRuQPqmAAZGr7Hm3oO7n29/n0rfZw0NZy4I0X9E3ebzl5KXu0aqT65KYK161j5BujT7z41OVWX4Q==
 
-"@cloak-app/utils@^1.7.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@cloak-app/utils/-/utils-1.7.0.tgz#ca7265fd3ff1347c0fd421286d196ce3ac61343a"
-  integrity sha512-PrI4jnNYXQzHfC897PF6zcr6ml9CZjLBcpdsRc/RWTRPzFB3pyZGkWrMp1lzakvUll7Z0j7uekUNANJiSna5CQ==
+"@cloak-app/utils@^1.7.1":
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@cloak-app/utils/-/utils-1.7.1.tgz#3e4f26b8dfeba0ccbfe2ac03c8930aa48dd130e5"
+  integrity sha512-FK4EbcDFqC6oCqIWz7UCcQc/HbI5KOPEt7xBi8tPSIplo0BxPzNVMrc4ehChEn3gLrvq+VOhxfrCFNdTvQqVqg==
   dependencies:
     axios-mock-adapter "^1.20.0"
     memfs "^3.0.0"

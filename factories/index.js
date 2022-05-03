@@ -1,6 +1,5 @@
 import makeClient from './craft-client-factory'
 import axios from 'axios'
-import { mockAxiosGql } from '@cloak-app/utils/src/axios'
 
 // Used passed in Axios instance or fallback to a node_modules instance.  The
 // latter may be used when creating a client from another @cloak-app module.
@@ -14,11 +13,4 @@ export function makeCraftClient(settings = {}) {
 export function makeModuleCraftClient(moduleContainer) {
 	const craftOptions = moduleContainer.options.cloak.craft
 	return moduleContainer.options.craftMock || makeCraftClient(craftOptions)
-}
-
-// Make a Mock axios adapter given an array of mocking instructions
-export function makeMockedCraftClient(mocks) {
-	const $craft = makeCraftClient()
-	mockAxiosGql($craft, mocks)
-	return $craft
 }
