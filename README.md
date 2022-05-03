@@ -56,7 +56,7 @@ export default
 
 ### Inside of Nuxt module
 
-You can use the `makeModuleCraftClient()` factory method within a Nuxt module to build a `$craft` instance.  In a module, we can't use the instance that is injected by the `craft-client` because that is constructed later in the lifecycle
+You can use the `makeModuleCraftClient()` factory method within a Nuxt module to build a `$craft` instance.  In a module, we can't use the instance that is injected by the `craft-client` plugin because that is constructed later in the lifecycle.
 
 ```js
 // A Nuxt module
