@@ -32,8 +32,9 @@ export default function() {
 	// Statically generate dynamic pages
 	requireOnce(this, join(__dirname, './modules/generate-pages.js'))
 
-	// Generate Netlify redirects
-	if (process.env.NETLIFY) {
+	// Generate Netlify redirects.  Check that the endpoint has a value to prevent
+	// this from running on Cloak demo sites where Craft is mocked.
+	if (process.env.NETLIFY && this.options.cloak.craft.endpoint) {
 		requireOnce(this, join(__dirname, './modules/create-netlify-redirects.js'))
 	}
 }
