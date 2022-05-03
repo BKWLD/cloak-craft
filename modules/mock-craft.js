@@ -2,7 +2,7 @@
  * Add support for Mocking the Craft instance
  */
 import { join } from 'path'
-import { makeCraftClient } from '../factories'
+import { makeModuleCraftClient } from '../factories'
 import { mockAxiosGql } from '@cloak-app/utils'
 export default function() {
 
@@ -12,10 +12,10 @@ export default function() {
 
 	// Make the Craft mock and store it on options for use by
 	// makeModuleCraftClient()
-	const $craft = makeCraftClient()
+	const $craft = makeModuleCraftClient(this)
 	mockAxiosGql($craft, mocks)
 	this.options.craftMock = $craft
 
 	// Mock runtime Craft instances, adding after craft-client
-	this.options.plugins.push(join(__dirname, '../plugins/mock-craft.js'))
+	this.options.plugins.push(join(__dirname, '../plugins/mock-runtime-client.js'))
 }
