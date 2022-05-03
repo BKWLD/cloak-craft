@@ -31,7 +31,7 @@ export default {
 	// Make a mock that is used in nuxt hooks of this module
 	craftMock: makeCraftMock(),
 
-	// Load plugin that mocks runtime crat data data
+	// Load plugin that mocks runtime craft data
 	extendPlugins(plugins) {
 		return addPluginAfter(plugins, 'craft-client', '~/plugins/mock-craft')
 	}
