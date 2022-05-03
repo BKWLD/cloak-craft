@@ -2,6 +2,7 @@ import { join } from 'path'
 import {
 	requireLate,
 	requireOnce,
+	setDefaultOptions,
 	setPublicDefaultOptions
 } from '@cloak-app/utils'
 export default function() {
@@ -9,11 +10,16 @@ export default function() {
 	// Have Nuxt transpile resources
 	this.options.build.transpile.push('@cloak-app/craft')
 
+	// Set default non-exposed options
+	setDefaultOptions(this, 'craft', {
+		generateRedirects: false,
+		pageTypenames: [],
+	})
+
 	// Set default options
 	setPublicDefaultOptions(this, 'craft', {
 		endpoint: process.env.CMS_ENDPOINT,
 		site: process.env.CMS_SITE,
-		pageTypenames: [],
 	})
 
 	// Enable the generate fallback. This is done so that Craft's preview system
@@ -32,9 +38,8 @@ export default function() {
 	// Statically generate dynamic pages
 	requireOnce(this, join(__dirname, './modules/generate-pages.js'))
 
-	// Generate Netlify redirects.  Check that the endpoint has a value to prevent
-	// this from running on Cloak demo sites where Craft is mocked.
-	if (process.env.NETLIFY && this.options.cloak.craft.endpoint) {
+	// Generate Netlify redirects
+	if (process.env.NETLIFY && this.options.cloak.craft.generateRedirects) {
 		requireOnce(this, join(__dirname, './modules/create-netlify-redirects.js'))
 	}
 }
