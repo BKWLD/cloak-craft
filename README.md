@@ -25,6 +25,7 @@ Set these properties within `cloak: { craft: { ... } }` in the nuxt.config.js:
 - `site` - The Craft CMS Site handle to restrict queries to.  If populated, it gets automatically passed into all GraphQL queries as a variable called `site`.  Defaults to `process.env.CMS_SITE`.
 - `pageTypenames` - An array of GraphQL typenames of Craft entry types whose URIs should be generated as pages.  For example: `['towers_tower_Entry']`.  Defaults to `[]`.
 - `generateRedirects` - If true, adds redirect to the `static/_redirects` file using a `redirects` Craft section.
+- `mocks` - An array of objects for use with [`mockAxiosGql`](https://github.com/BKWLD/cloak-utils/blob/main/src/axios.js).
 
 ## Usage
 

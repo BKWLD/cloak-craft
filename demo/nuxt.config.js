@@ -1,5 +1,8 @@
-import { addPluginAfter } from '@cloak-app/utils'
-import { makeCraftMock } from './plugins/mock-craft'
+// Mock stubs
+import pageEntriesToGenerate from './stubs/page-entries-to-generate.json'
+import towerExample1 from './stubs/towers/example-1.json'
+import towerExample2 from './stubs/towers/example-2.json'
+import redirects from './stubs/redirects.json'
 
 // Nuxt config
 export default {
@@ -25,14 +28,26 @@ export default {
 		// Generate test pages
 		craft: {
 			pageTypenames: [ 'towers_tower_Entry' ],
+			mocks: [
+				{
+					query: 'getPageEntriesToGenerate',
+					response: pageEntriesToGenerate,
+				},
+				{
+					query: 'getTower',
+					variables: { uri: 'example-1' },
+					response: towerExample1,
+				},
+				{
+					query: 'getTower',
+					variables: { uri: 'example-2' },
+					response: towerExample2,
+				},
+				{
+					query: 'getRedirects',
+					response: redirects,
+				}
+			]
 		},
 	},
-
-	// Make a mock that is used in nuxt hooks of this module
-	craftMock: makeCraftMock(),
-
-	// Load plugin that mocks runtime craft data
-	extendPlugins(plugins) {
-		return addPluginAfter(plugins, 'craft-client', '~/plugins/mock-craft')
-	}
 }

@@ -20,6 +20,7 @@ export default function() {
 	setPublicDefaultOptions(this, 'craft', {
 		endpoint: process.env.CMS_ENDPOINT,
 		site: process.env.CMS_SITE,
+		mocks: [],
 	})
 
 	// Enable the generate fallback. This is done so that Craft's preview system
@@ -34,6 +35,9 @@ export default function() {
 	// this.addPlugin so I don't have to deal with adding sub-imports via
 	// addTemplate.
 	this.options.plugins.unshift(join(__dirname, 'plugins/craft-client.js'))
+
+	// Support mocking
+	requireOnce(this, join(__dirname, './modules/mock-craft.js'))
 
 	// Statically generate dynamic pages
 	requireOnce(this, join(__dirname, './modules/generate-pages.js'))
