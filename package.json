@@ -1,6 +1,6 @@
 {
 	"name": "@cloak-app/craft",
-	"version": "1.1.1",
+	"version": "1.2.0",
 	"description": "Craft CMS API client and static site generation conventions.",
 	"repository": "git@github.com:BKWLD/cloak-craft.git",
 	"author": "Bukwild <info@bukwild.com>",
