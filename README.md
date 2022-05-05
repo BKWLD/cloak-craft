@@ -26,6 +26,7 @@ Set these properties within `cloak: { craft: { ... } }` in the nuxt.config.js:
 - `pageTypenames` - An array of GraphQL typenames of Craft entry types whose URIs should be generated as pages.  For example: `['towers_tower_Entry']`.  Defaults to `[]`.
 - `generateRedirects` - If true, adds redirect to the `static/_redirects` file using a `redirects` Craft section.
 - `mocks` - An array of objects for use with [`mockAxiosGql`](https://github.com/BKWLD/cloak-utils/blob/main/src/axios.js).
+- `injectClient` - Boolean for whether to inject the `$craft` client globally.  Defaults to `true`.  You would set this to `false` when this module is a depedency of another module (like [@cloak-app/algolia](https://github.com/BKWLD/cloak-algolia)) that is creating `$craft` a different way.
 
 ## Usage
 

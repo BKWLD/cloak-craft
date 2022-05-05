@@ -14,6 +14,7 @@ export default function() {
 	setDefaultOptions(this, 'craft', {
 		generateRedirects: false,
 		pageTypenames: [],
+		injectClient: true,
 	})
 
 	// Set default options
@@ -34,7 +35,9 @@ export default function() {
 	// Add the Craft plugin which creates the Craft instance of Axios. Not using
 	// this.addPlugin so I don't have to deal with adding sub-imports via
 	// addTemplate.
-	this.options.plugins.unshift(join(__dirname, 'plugins/craft-client.js'))
+	if (this.options.cloak.craft.injectClient) {
+		this.options.plugins.unshift(join(__dirname, 'plugins/craft-client.js'))
+	}
 
 	// Support mocking
 	requireOnce(this, join(__dirname, './modules/mock-craft.js'))
