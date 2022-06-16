@@ -4,7 +4,6 @@
 # be used.
 fragment srcset on AssetInterface {
 	...image
-	url
 	w1920:      url @transform(width: 1920)
 	w1920_webp: url @transform(width: 1920, format:"webp")
 	w1440:      url @transform(width: 1440)

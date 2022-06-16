@@ -8,5 +8,6 @@ fragment image on AssetInterface {
 	mimeType
 	focalPoint
 	path
+	url
 }
 
