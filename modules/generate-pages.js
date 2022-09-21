@@ -7,43 +7,48 @@ import defaultsDeep from 'lodash/defaultsDeep'
  */
 export default function() {
 
-	// Make a consola scope
-	const log = consola.withTag('@cloak-app/craft')
-
 	// Create noindex property in sitemap options in case this loads first
 	defaultsDeep(this.options, { sitemap: { routes: [] }})
 
-	// Adding routes
-	this.nuxt.hook('generate:extendRoutes', async routes => {
+	// Hook in to Nuxt
+	this.nuxt.hook('generate:extendRoutes', extendRoutes.bind(this))
+}
 
-		// Log starting
-		const pageTypenames = this.options.cloak.craft.pageTypenames
-		if (!pageTypenames.length) return
-		log.info(`Adding SSG routes for ${pageTypenames.length} pageTypenames`)
+// Add routes, mutatating the passed in array
+export async function extendRoutes(routes, { $craft } = {}) {
 
-		// Get an array of URIs and robots rules of all pages to be generated
-		const $craft = makeModuleCraftClient(this),
-			entries = (await Promise.all(
-				pageTypenames.map(typename => {
-					return getEntriesForType($craft, typename)
-				})
-			)).flat()
+	// Make a consola scope
+	const log = consola.withTag('@cloak-app/craft')
 
-		// Loop through the entries
-		entries.forEach(entry => {
+	// Log starting
+	const pageTypenames = this.options.cloak.craft.pageTypenames
+	if (!pageTypenames.length) return
+	log.info(`Adding SSG routes for ${pageTypenames.length} pageTypenames`)
 
-			// Add routes to the list that should be generated
-			const route = entry.uri == '__home__' ? '/' : `/${entry.uri}`
-			routes.push({ route })
+	// Make Craft adapter if not provided
+	if (!$craft) $craft = makeModuleCraftClient(this)
 
-			// Add routes without noindex to @nuxtjs/sitemap
-			const robots = entry.seo?.[0]?.robots || entry.robots || []
-			if (!robots.includes('noindex')) this.options.sitemap.routes.push(route)
+	// Get an array of URIs and robots rules of all pages to be generated
+	const entries = (await Promise.all(
+		pageTypenames.map(typename => {
+			return getEntriesForType($craft, typename)
 		})
+	)).flat()
 
-		// All done
-		log.info(`Added SSG routes`)
+	// Loop through the entries
+	entries.forEach(entry => {
+
+		// Add routes to the list that should be generated
+		const route = entry.uri == '__home__' ? '/' : `/${entry.uri}`
+		routes.push({ route })
+
+		// Add routes without noindex to @nuxtjs/sitemap
+		const robots = entry.seo?.[0]?.robots || entry.robots || []
+		if (!robots.includes('noindex')) this.options.sitemap.routes.push(route)
 	})
+
+	// All done
+	log.info(`Added SSG routes`)
 }
 
 // Get just the uri and robots for a pageTypenameName
