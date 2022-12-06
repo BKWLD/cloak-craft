@@ -29,7 +29,7 @@ export default
 			return unless @page
 
 			# Look for meta tag values
-			title = @pageSeo.metaTitle or @page.title or title or
+			title = @pageSeo.metaTitle or title or @page.title or
 				@defaultSeo.metaTitle
 			description = @pageSeo.metaDescription or description or
 				@defaultSeo.metaDescription
