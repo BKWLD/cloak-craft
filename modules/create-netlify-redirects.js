@@ -26,7 +26,8 @@ export default function() {
 
 		// Append rules
 		rules.forEach(rule => {
-			redirects += `\n${rule.from} ${rule.to} ${rule.code}!`
+			const from = encodeURI(rule.from), to = encodeURI(rule.to)
+			redirects += `\n${from} ${to} ${rule.code}!`
 		})
 
 		// Write file
