@@ -57,10 +57,15 @@ function getEntriesForType($craft, typename) {
 		variables: parseTypename(typename),
 		query: `
 			query getPageEntriesToGenerate(
-				$section:[String]
-				$type:[String]
-				$site:[String]) {
-				entries(section:$section, type:$type, site:$site) {
+				$section: [String]
+				$type: [String]
+				$site: [String]) {
+				entries(
+					section: $section
+					type: $type
+					site: $site
+					uri: "not null"
+				) {
 					uri
 					robots
 					seo { robots } # If using SuperTable
