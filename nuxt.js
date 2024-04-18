@@ -21,6 +21,7 @@ export default function() {
 	setPublicDefaultOptions(this, 'craft', {
 		endpoint: process.env.CMS_ENDPOINT,
 		site: process.env.CMS_SITE,
+		payloadTransformers: [],
 		mocks: [],
 	})
 

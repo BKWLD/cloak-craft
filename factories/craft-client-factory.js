@@ -1,10 +1,12 @@
 import pickBy from 'lodash/pickBy'
 
 // Factory method for making Craft Axios clients
-export default function (axios, { endpoint, site, query } = {}) {
+export default function (axios, {
+	endpoint, site, query, payloadTransformers
+} = {}) {
 
-	// Store custom transformers
-	const payloadTransformers = []
+	// Make empty array if not defined
+	if (!payloadTransformers) payloadTransformers = []
 
 	// Make Craft instance
 	const craft = axios.create({
