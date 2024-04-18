@@ -3,6 +3,9 @@ import pickBy from 'lodash/pickBy'
 // Factory method for making Craft Axios clients
 export default function (axios, { endpoint, site, query } = {}) {
 
+	// Store custom transformers
+	const payloadTransformers = []
+
 	// Make Craft instance
 	const craft = axios.create({
 		baseURL: endpoint,
@@ -14,9 +17,12 @@ export default function (axios, { endpoint, site, query } = {}) {
 	// Add execute helper for running gql queries
 	craft.execute = async payload => {
 
-		// Massage the request
+		// Transform the request
 		payload = cleanEmptyArrays(payload)
 		payload = restrictToSite(payload, site)
+		payloadTransformers.forEach(transformer => {
+			payload = transformer(payload)
+		})
 
 		// Execute the query
 		const response = await craft({
@@ -46,6 +52,11 @@ export default function (axios, { endpoint, site, query } = {}) {
 
 	// Update the site variable
 	craft.setSite = (newSite) => site = newSite
+
+	// Add custom payload transformer
+	craft.addPayloadTransformer = (callback) => {
+		payloadTransformers.push(callback)
+	}
 
 	// Return the client
 	return craft

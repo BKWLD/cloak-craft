@@ -38,6 +38,7 @@ The [`craft-client` Nuxt plugin](./plugins/craft-client.js) injects `$craft` glo
 - `$craft.getEntries({ query, variables })` - Sugar for `$craft.execute()` that returns the `entries` property of the GraphQL response.
 - `$craft.getEntry({ query, variables })` - Sugar for `$craft.execute()` that returns the `entry` property of the GraphQL response.
 - `$craft.setSite(site)` - Updates the `site` variable for all future requests at runtime.
+- `$craft.addPayloadTransformer(callback)` - Adds a transforming callback. A callback has a type of `({ query: string, variables?: object}) => { query: string, variables?: object}`.  Example: `$craft.addPayloadTransformer((payload) => payload.variables.category = 'pants')`.
 
 ```coffee
 # A page component
