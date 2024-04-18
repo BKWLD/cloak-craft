@@ -21,7 +21,6 @@ export default function() {
 	setPublicDefaultOptions(this, 'craft', {
 		endpoint: process.env.CMS_ENDPOINT,
 		site: process.env.CMS_SITE,
-		payloadTransformers: [],
 		mocks: [],
 	})
 
@@ -44,7 +43,9 @@ export default function() {
 	requireOnce(this, join(__dirname, './modules/mock-craft.js'))
 
 	// Statically generate dynamic pages
-	requireOnce(this, join(__dirname, './modules/generate-pages.js'))
+	if (this.options.cloak.craft.generatePages) {
+		requireOnce(this, join(__dirname, './modules/generate-pages.js'))
+	}
 
 	// Generate Netlify redirects
 	if (process.env.NETLIFY && this.options.cloak.craft.generateRedirects) {
