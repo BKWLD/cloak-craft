@@ -13,6 +13,7 @@ export default function() {
 	// Set default non-exposed options
 	setDefaultOptions(this, 'craft', {
 		generateRedirects: false,
+		generatePages: true,
 		pageTypenames: [],
 		injectClient: true,
 	})
