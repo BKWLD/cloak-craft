@@ -13,6 +13,7 @@ export default function() {
 	// Set default non-exposed options
 	setDefaultOptions(this, 'craft', {
 		generateRedirects: false,
+		generatePages: true,
 		pageTypenames: [],
 		injectClient: true,
 	})
@@ -43,7 +44,9 @@ export default function() {
 	requireOnce(this, join(__dirname, './modules/mock-craft.js'))
 
 	// Statically generate dynamic pages
-	requireOnce(this, join(__dirname, './modules/generate-pages.js'))
+	if (this.options.cloak.craft.generatePages) {
+		requireOnce(this, join(__dirname, './modules/generate-pages.js'))
+	}
 
 	// Generate Netlify redirects
 	if (process.env.NETLIFY && this.options.cloak.craft.generateRedirects) {

@@ -25,6 +25,7 @@ Set these properties within `cloak: { craft: { ... } }` in the nuxt.config.js:
 - `site` - The Craft CMS Site handle to restrict queries to.  If populated, it gets automatically passed into all GraphQL queries as a variable called `site`.  Defaults to `process.env.CMS_SITE`.
 - `pageTypenames` - An array of GraphQL typenames of Craft entry types whose URIs should be generated as pages.  For example: `['towers_tower_Entry']`.  Defaults to `[]`.
 - `generateRedirects` - If true, adds redirect to the `static/_redirects` file using a `redirects` Craft section.
+- `payloadTransformers` - An array of `addPayloadTransformer` callbacks (see below)
 - `mocks` - An array of objects for use with [`mockAxiosGql`](https://github.com/BKWLD/cloak-utils/blob/main/src/axios.js).
 - `injectClient` - Boolean for whether to inject the `$craft` client globally.  Defaults to `true`.  You would set this to `false` when this module is a depedency of another module (like [@cloak-app/algolia](https://github.com/BKWLD/cloak-algolia)) that is creating `$craft` a different way.
 
@@ -38,6 +39,7 @@ The [`craft-client` Nuxt plugin](./plugins/craft-client.js) injects `$craft` glo
 - `$craft.getEntries({ query, variables })` - Sugar for `$craft.execute()` that returns the `entries` property of the GraphQL response.
 - `$craft.getEntry({ query, variables })` - Sugar for `$craft.execute()` that returns the `entry` property of the GraphQL response.
 - `$craft.setSite(site)` - Updates the `site` variable for all future requests at runtime.
+- `$craft.addPayloadTransformer(callback)` - Adds a transforming callback. A callback has a type of `({ query: string, variables?: object}) => { query: string, variables?: object}`.  Example: `$craft.addPayloadTransformer((payload) => payload.variables.category = 'pants')`.
 
 ```coffee
 # A page component
